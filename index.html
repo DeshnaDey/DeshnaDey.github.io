@@ -678,13 +678,17 @@ function closeLightbox() {
 
 let logoClicks = 0, logoTimer = null;
 
-document.getElementById('nav-logo-trigger').addEventListener('click', function(e) {
+const logo = document.getElementById('nav-logo-trigger');
+
+logo.addEventListener('click', function(e) {
+  e.preventDefault(); // 🚨 THIS FIXES IT
+
   logoClicks++;
   clearTimeout(logoTimer);
 
   logoTimer = setTimeout(() => {
     logoClicks = 0;
-  }, 1500);
+  }, 1800); // slightly more forgiving
 
   if (logoClicks >= 3) {
     logoClicks = 0;
@@ -695,12 +699,6 @@ document.getElementById('nav-logo-trigger').addEventListener('click', function(e
     }
   }
 });
-
-
-// EXISTING CODE
-renderAll();
-initReveal();
-initBars();
 
 // ═══════════════════════════════════════════════════════════════
 //  ANIMATIONS & INIT
