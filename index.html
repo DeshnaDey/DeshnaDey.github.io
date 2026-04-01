@@ -673,21 +673,6 @@ function closeLightbox() {
 }
 
 // ═══════════════════════════════════════════════════════════════
-//  SECRET TRIGGER: triple-click logo → open editor
-// ═══════════════════════════════════════════════════════════════
-let logoClicks = 0, logoTimer = null;
-document.getElementById('nav-logo-trigger').addEventListener('click', function(e) {
-  e.preventDefault();
-  logoClicks++;
-  clearTimeout(logoTimer);
-  logoTimer = setTimeout(() => { logoClicks = 0; }, 1500);
-  if (logoClicks >= 3) {
-    logoClicks = 0;
-    window.location.href = 'edit.html';
-  }
-});
-
-// ═══════════════════════════════════════════════════════════════
 //  ANIMATIONS & INIT
 // ═══════════════════════════════════════════════════════════════
 window.addEventListener('scroll', () => {
@@ -739,21 +724,6 @@ function initBars() {
   });
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  LOCALSTORAGE — load latest data on open
-// ═══════════════════════════════════════════════════════════════
-const STORAGE_KEY = 'deshna_portfolio_v1';
-function loadFromStorage() {
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      Object.keys(parsed).forEach(k => { DATA[k] = parsed[k]; });
-    }
-  } catch(e) {}
-}
-
-loadFromStorage();
 renderAll();
 initReveal();
 initBars();
